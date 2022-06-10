@@ -3,6 +3,10 @@ locals {
   subnet_numbers = [for x in range(var.number_of_subnet) : x % length(local.az_names)]
 }
 
+data "aws_availability_zones" "available" {
+  exclude_names = []
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
