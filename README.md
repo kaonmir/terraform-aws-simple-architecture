@@ -4,5 +4,5 @@
 
 ---
 
-![Simple Architecture](./assets/Simple%20Architecture.png)
+![Simple Architecture](https://raw.githubusercontent.com/kaonmir/terraform-aws-simple-architecture/v0.2.0/assets/Simple%20Architecture.png)
 
