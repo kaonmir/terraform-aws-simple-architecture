@@ -128,7 +128,7 @@ resource "aws_security_group_rule" "lb_sg-http_from_elb" {
 resource "aws_security_group_rule" "lb_sg-https_from_elb" {
   type              = "ingress"
   from_port         = 443
-  to_port           = 80
+  to_port           = 443
   protocol          = "TCP"
   security_group_id = aws_security_group.lb_sg.id
   cidr_blocks       = ["0.0.0.0/0"]
