@@ -1,10 +1,12 @@
 variable "aws_region" {
-  type = string
+  type        = string
+  description = "리전"
 }
 
 variable "number_of_subnet" {
-  type    = number
-  default = 2
+  type        = number
+  description = "서브넷 개수"
+  default     = 2
 }
 
 variable "project_name" {
@@ -31,15 +33,15 @@ variable "launch_template" {
 
 variable "auto_scaling_group" {
   type = object({
-    desired_capacity = number
-    max_size         = number
-    min_size         = number
+    desired_size = number
+    max_size     = number
+    min_size     = number
   })
   description = "ASG에서 인스턴스의 최대, 최소, 희망 크기를 정한다."
   default = {
-    desired_capacity = 1
-    max_size         = 2
-    min_size         = 1
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
   }
 }
 
