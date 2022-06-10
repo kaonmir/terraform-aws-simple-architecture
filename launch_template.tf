@@ -1,6 +1,7 @@
 locals {
-  image_url = "%{if var.image.registry != ""}${var.image.registry}/%{endif}${var.image.repository}:${var.image.tag}"
-  http_port = "-p 80:${var.app.port}"
+  image_url  = "%{if var.image.registry != ""}${var.image.registry}/%{endif}${var.image.repository}:${var.image.tag}"
+  http_port  = "%{if var.app.allow_http_access == true}-p 80:${var.app.port}%{endif}"
+  https_port = "%{if var.app.allow_https_access == true}-p 443:${var.app.port}%{endif}"
 }
 
 resource "aws_launch_template" "launch_template" {
@@ -57,7 +58,7 @@ data "template_file" "user_data" {
 
     # Login and run docker container
     sudo aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${var.image.registry}
-    sudo docker run --name application ${local.http_port} -d ${local.image_url}
+    sudo docker run --name application ${local.http_port} ${local.https_port} -d ${local.image_url}
   EOT
 }
 
