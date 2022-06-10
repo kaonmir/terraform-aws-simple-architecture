@@ -2,4 +2,4 @@
 *.backup
 *tfstate
 .vscode
-providers.tf
+providers.tf 
