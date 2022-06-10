@@ -14,17 +14,29 @@ data "aws_iam_policy" "ssm_access_ec2" {
 }
 
 resource "aws_iam_policy" "ec2_access_ecr" {
-  name        = "FullAcessToECR"
-  description = "Full Access to ECR"
+  name        = "${var.project_name}-ReadOnlyAcessToECR"
+  description = "Read only to ECR"
 
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
-        Action   = ["ecr:*"]
-        Effect   = "Allow"
-        Resource = "*"
+        Effect = "Allow",
+        Action = [
+          "ecr:Get*",
+          "ecr:List*",
+          "ecr:Describe*",
+          "ecr:BatchGetImage",
+          "ecr:BatchCheckLayerAvailability"
+        ],
+        #! 전체 ECR에 접근할 수 있는 권한을 줌
+        Resource = "arn:aws:ecr:*:*:repository/*"
       },
+      {
+        Effect   = "Allow",
+        Action   = "ecr:GetAuthorizationToken",
+        Resource = "*"
+      }
     ]
   })
 }
@@ -42,3 +54,6 @@ resource "aws_iam_instance_profile" "profile" {
   name = "${var.project_name}-instance_profile"
   role = aws_iam_role.ec2_role.name
 }
+
+
+
