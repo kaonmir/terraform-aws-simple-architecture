@@ -1,9 +1,9 @@
 resource "aws_autoscaling_group" "asg" {
   name = "${var.project_name}-asg"
 
-  desired_capacity = var.asg.desired_capacity
-  max_size         = var.asg.max_size
-  min_size         = var.asg.min_size
+  desired_capacity = var.auto_scaling_group.desired_capacity
+  max_size         = var.auto_scaling_group.max_size
+  min_size         = var.auto_scaling_group.min_size
 
   vpc_zone_identifier = module.vpc.private_subnets
   launch_template {

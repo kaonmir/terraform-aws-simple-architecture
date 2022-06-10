@@ -29,7 +29,7 @@ variable "launch_template" {
   }
 }
 
-variable "asg" {
+variable "auto_scaling_group" {
   type = object({
     desired_capacity = number
     max_size         = number
@@ -49,13 +49,13 @@ variable "alb_deletion_protection" {
   default     = false
 }
 
-variable "ecr" {
+variable "image" {
   type = object({
     registry   = string
     repository = string
     tag        = string
   })
-  description = "ECR 관련 정보"
+  description = "Image 관련 정보"
   default = {
     registry   = ""
     repository = "nginx"
