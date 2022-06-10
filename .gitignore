@@ -1,5 +1,5 @@
 .terraform*
-*.backup
+*.backup 
 *tfstate
 .vscode
 providers.tf 
