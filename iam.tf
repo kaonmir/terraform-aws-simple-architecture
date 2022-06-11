@@ -51,7 +51,7 @@ resource "aws_iam_role" "ec2_role" {
 }
 
 resource "aws_iam_instance_profile" "profile" {
-  name = "${var.project_name}-instance_profile"
+  name = aws_iam_role.ec2_role.name
   role = aws_iam_role.ec2_role.name
 }
 
