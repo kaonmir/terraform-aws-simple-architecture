@@ -11,6 +11,7 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   # TODO: CIDR도 var로 유동적으로 관리 vpc: /16, subnet: /24
+  name = var.project_name
   cidr = "10.0.0.0/16"
   azs  = [for x in local.subnet_numbers : local.az_names[x]]
 
@@ -18,6 +19,7 @@ module "vpc" {
   public_subnets  = [for num in local.subnet_numbers : "10.0.10${num}.0/24"]
 
   enable_nat_gateway = true
+  single_nat_gateway = true
   create_vpc         = true
 
   tags = {
